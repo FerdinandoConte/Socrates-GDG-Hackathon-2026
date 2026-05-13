@@ -55,10 +55,12 @@ graph TD
 ## 🎥 Demo & Pitch Deck
 
 The interactive pitch deck for this project is hosted on GitHub Pages:
-[**View Pitch Deck**](https://ferdinandoconte.github.io/Socrates-GDG-Hackathon-2026/docs/pitch/index.html)
+[**View Pitch Deck**](https://ferdinandoconte.github.io/Socrates-GDG-Hackathon-2026/pitch/index.html)
 
 You can also view the short demonstration video included in the repository:
-[`docs/pitch/short-demo.mp4`](docs/pitch/short-demo.mp4)
+<video src="https://github.com/FerdinandoConte/Socrates-GDG-Hackathon-2026/raw/main/docs/pitch/short-demo.mp4" controls="controls" muted="muted" style="max-height:640px; min-height: 200px; width: 100%;"></video>
+
+*(If the video doesn't load inline, you can [download it here](https://github.com/FerdinandoConte/Socrates-GDG-Hackathon-2026/raw/main/docs/pitch/short-demo.mp4))*
 
 ## 🚦 Getting Started
 
