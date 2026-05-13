@@ -1,0 +1,17 @@
+[project]
+name = "active-learning-agent"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "langgraph>=0.2",
+    "langchain-core>=0.3",
+    "langchain-google-genai>=2.0",
+    "streamlit>=1.35",
+    "pydantic>=2.0",
+    "python-dotenv>=1.0",
+]
+[tool.setuptools.packages.find]
+# Tell setuptools to treat only 'agent' as a Python package
+include = ["agent*"]
+# Explicitly exclude the data folder
+exclude = ["data*"]

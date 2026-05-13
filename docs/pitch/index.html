@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SOCRATES — Pitch Deck</title>
+
+<!-- =========================================================
+     FONTS
+========================================================== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   THEME VARIABLES — modify here to restyle the entire deck
+========================================================== */
+:root {
+  --bg:           #f6f4ef;
+  --bg-alt:       #ecebe4;
+  --ink:          #1a1a1a;
+  --ink-soft:     #4a4a4a;
+  --ink-mute:     #8a8a85;
+  --line:         #d8d6cf;
+  --accent:       #FF4300;       /* SOCRATES brand orange */
+  --accent-soft:  #FFB199;       /* soft brand peach */
+  --positive:     #3d7a5f;
+  --negative:     #b04a3a;
+  --slide-w: 1920px;             /* FORMAT: 1920x1080 */
+  --slide-h: 1080px;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans:  'Inter Tight', system-ui, sans-serif;
+  --mono:  'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: #0a0a0a;
+  font-family: var(--sans);
+  color: var(--ink);
+}
+
+/* =========================================================
+   DECK CONTAINER & SCALING (16:9, 1920x1080)
+========================================================== */
+.deck {
+  position: fixed; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.stage {
+  width: var(--slide-w); height: var(--slide-h);
+  position: relative;
+  transform-origin: center center;
+}
+.slide {
+  position: absolute; inset: 0;
+  background: var(--bg);
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+  overflow: hidden;
+  padding: 90px 120px;
+  display: flex; flex-direction: column;
+}
+.slide.active { opacity: 1; visibility: visible; }
+
+.slide-meta {
+  position: absolute; top: 50px; right: 80px;
+  display: flex; align-items: center; gap: 16px;
+  font-family: var(--mono); font-size: 14px;
+  letter-spacing: 0.1em; color: var(--ink-mute);
+  text-transform: uppercase; z-index: 10;
+}
+.slide-meta .num { color: var(--ink); font-weight: 500; }
+
+.brand-mark {
+  position: absolute; top: 50px; left: 80px;
+  font-family: var(--serif); font-size: 20px;
+  font-weight: 500; letter-spacing: 0.15em;
+  color: var(--ink); z-index: 10;
+  display: flex; align-items: center; gap: 12px;
+}
+.brand-mark .bm-icon {
+  width: 22px; height: 22px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+
+.progress {
+  position: fixed; bottom: 0; left: 0;
+  height: 4px; background: var(--accent);
+  transition: width 0.5s ease; z-index: 100;
+}
+
+.nav-hint {
+  position: fixed; bottom: 22px; right: 30px;
+  font-family: var(--mono); font-size: 11px;
+  color: rgba(255,255,255,0.5); letter-spacing: 0.1em;
+  z-index: 100;
+}
+.nav-hint kbd {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 3px; padding: 2px 6px; margin: 0 2px;
+}
+
+/* =========================================================
+   ============= SLIDE 1 — THE PROBLEM =====================
+========================================================== */
+.s1-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+.s1-text .eyebrow {
+  font-family: var(--mono); font-size: 14px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 36px;
+}
+.s1-text h1 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: 92px; line-height: 1.02;
+  letter-spacing: -0.025em; margin-bottom: 40px;
+}
+.s1-text h1 em {
+  font-style: italic; color: var(--accent); font-weight: 300;
+}
+.s1-text p {
+  font-size: 22px; line-height: 1.6;
+  color: var(--ink-soft); max-width: 640px;
+  margin-bottom: 22px;
+}
+
+/* Right side — confused face with tight orbit ABOVE the head */
+.s1-visual {
+  position: relative; width: 100%; height: 760px;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 40px;
+}
+
+/* Wrapper to position face + orbit-above relative to each other */
+.s1-character {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center;
+}
+
+/* Face */
+.face {
+  position: relative;
+  width: 360px; height: 360px;
+  background: var(--bg);
+  border: 4px solid var(--ink);
+  border-radius: 50%;
+  z-index: 5;
+}
+.face .eyes {
+  position: absolute; top: 36%; left: 0; right: 0;
+  display: flex; justify-content: space-around;
+  padding: 0 70px;
+}
+.face .eye {
+  font-family: var(--serif);
+  font-size: 76px; font-weight: 600;
+  line-height: 0.6; color: var(--ink);
+}
+.face .mouth {
+  position: absolute; bottom: 24%; left: 50%;
+  transform: translateX(-50%);
+  width: 80px; height: 64px;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  background: var(--ink);
+}
+/* (Brows removed per request — face has only X eyes + open mouth) */
+
+/* Orbit container — 5 AI tool logos circling ABOVE the head, evenly spaced (72°) */
+.orbit-above {
+  position: absolute;
+  top: -120px;           /* sits above the head, centered higher */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 360px;
+  height: 360px;
+  pointer-events: none;
+  animation: spin 16s linear infinite;
+}
+@keyframes spin {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to   { transform: translateX(-50%) rotate(360deg); }
+}
+.orbit-item {
+  position: absolute;
+  width: 78px; height: 78px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  display: flex; align-items: center; justify-content: center;
+  /* counter-rotate so glyph stays upright */
+  animation: spin-reverse 16s linear infinite;
+}
+@keyframes spin-reverse {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+.orbit-item .logo-glyph {
+  font-size: 38px;
+  line-height: 1;
+}
+/* Brand-tinted colors per AI tool */
+.orbit-item.gemini     .logo-glyph { color: #1a73e8; }   /* Google blue */
+.orbit-item.chatgpt    .logo-glyph { color: #10A37F; }   /* OpenAI green */
+.orbit-item.notebooklm .logo-glyph { color: #4285F4; }   /* Google blue 2 */
+.orbit-item.notion     .logo-glyph { color: #1a1a1a; }   /* Notion black */
+.orbit-item.obsidian   .logo-glyph { color: #7c3aed; }   /* Obsidian purple */
+/* 5 logos evenly spaced at 72° intervals on a 360x360 orbit, radius 140px */
+/* Coordinates pre-computed: place each 78px item top-left so its center sits on the circle */
+.orbit-item:nth-child(1) { top:   1px; left: 141px; }   /*   0° — top */
+.orbit-item:nth-child(2) { top:  98px; left: 274px; }   /*  72° — upper right */
+.orbit-item:nth-child(3) { top: 254px; left: 223px; }   /* 144° — lower right */
+.orbit-item:nth-child(4) { top: 254px; left:  59px; }   /* 216° — lower left */
+.orbit-item:nth-child(5) { top:  98px; left:   8px; }   /* 288° — upper left */
+
+/* =========================================================
+   ============= SLIDE 2 — THE SOLUTION ====================
+========================================================== */
+#slide-2 { padding: 90px 100px; }
+
+.s2-eyebrow {
+  font-family: var(--mono); font-size: 14px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); text-align: center;
+  margin-bottom: 30px;
+}
+.s2-stage {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center;
+  gap: 80px; position: relative;
+}
+.s2-center {
+  display: flex; flex-direction: column; align-items: center; gap: 36px;
+}
+
+/* SOCRATES logo: bearded philosopher silhouette + name */
+.socrates-logo {
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+}
+.socrates-logo .mark {
+  width: 130px; height: 130px;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.socrates-logo .name {
+  font-family: var(--serif);
+  font-size: 52px; font-weight: 500;
+  letter-spacing: 0.28em; color: var(--ink);
+}
+.socrates-logo .tagline {
+  font-family: var(--mono); font-size: 13px;
+  letter-spacing: 0.3em; color: var(--ink-mute);
+  text-transform: uppercase;
+}
+
+/* Happy face */
+.face-happy {
+  width: 300px; height: 300px;
+  background: var(--bg);
+  border: 4px solid var(--ink);
+  border-radius: 50%;
+  position: relative;
+}
+.face-happy .eye-h {
+  position: absolute; width: 26px; height: 26px;
+  border-radius: 50%; background: var(--ink); top: 38%;
+}
+.face-happy .eye-h.left  { left: 27%; }
+.face-happy .eye-h.right { right: 27%; }
+.face-happy .smile {
+  position: absolute; bottom: 28%; left: 50%;
+  transform: translateX(-50%);
+  width: 110px; height: 55px;
+  border-bottom: 5px solid var(--ink);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-radius: 0 0 110px 110px / 0 0 55px 55px;
+}
+.face-happy .blush {
+  position: absolute; width: 30px; height: 14px;
+  background: var(--accent-soft); border-radius: 50%;
+  top: 55%; opacity: 0.75;
+}
+.face-happy .blush.left  { left: 16%; }
+.face-happy .blush.right { right: 16%; }
+
+/* Side feature cards */
+.s2-features {
+  display: flex; flex-direction: column;
+  gap: 28px; width: 380px;
+}
+.s2-features.left  { text-align: right; align-items: flex-end; }
+.s2-features.right { text-align: left;  align-items: flex-start; }
+
+.feature {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 26px 32px;
+  width: 100%; position: relative;
+}
+.feature::before {
+  content: ''; position: absolute;
+  width: 6px; height: 36px;
+  background: var(--accent);
+  border-radius: 3px;
+  top: 50%; transform: translateY(-50%);
+}
+.s2-features.left .feature::before  { right: -3px; }
+.s2-features.right .feature::before { left: -3px; }
+
+.feature h3 {
+  font-family: var(--serif); font-weight: 500;
+  font-size: 26px; margin-bottom: 8px; color: var(--ink);
+}
+.feature p {
+  font-size: 15px; line-height: 1.55; color: var(--ink-soft);
+}
+
+.s2-footer-tag {
+  margin-top: 50px; text-align: center;
+  font-family: var(--mono); font-size: 13px;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+/* Transition logos eject (slide 1 -> slide 2) */
+.s2-eject-logo {
+  position: absolute;
+  width: 78px; height: 78px;
+  border-radius: 18px;
+  background: #fff; border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 38px;
+  top: 50%; left: 50%;
+  opacity: 0; pointer-events: none;
+}
+#slide-2.active .s2-eject-logo { animation: ejectLogo 1s cubic-bezier(0.4, 0, 0.6, 1) both; }
+#slide-2.active .s2-eject-logo:nth-child(1) { --tx: -800px; --ty: -460px; animation-delay: 0s; }
+#slide-2.active .s2-eject-logo:nth-child(2) { --tx:  800px; --ty: -460px; animation-delay: 0.05s; }
+#slide-2.active .s2-eject-logo:nth-child(3) { --tx:  920px; --ty:  140px; animation-delay: 0.1s; }
+#slide-2.active .s2-eject-logo:nth-child(4) { --tx:    0px; --ty:  720px; animation-delay: 0.15s; }
+#slide-2.active .s2-eject-logo:nth-child(5) { --tx: -920px; --ty:  140px; animation-delay: 0.2s; }
+@keyframes ejectLogo {
+  0%   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(0.4); }
+}
+
+#slide-2.active .socrates-logo { animation: descend 1s cubic-bezier(0.2,0.8,0.2,1) 0.4s both; }
+@keyframes descend {
+  from { opacity: 0; transform: translateY(-260px) scale(0.7); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+#slide-2.active .face-happy { animation: pop 0.7s cubic-bezier(0.2,0.8,0.2,1) 0.7s both; }
+@keyframes pop {
+  from { opacity: 0; transform: scale(0.4); }
+  to   { opacity: 1; transform: scale(1); }
+}
+#slide-2.active .s2-features.left  .feature { animation: slideFromLeft 0.6s cubic-bezier(0.2,0.8,0.2,1) both; }
+#slide-2.active .s2-features.right .feature { animation: slideFromRight 0.6s cubic-bezier(0.2,0.8,0.2,1) both; }
+#slide-2.active .s2-features.left  .feature:nth-child(1) { animation-delay: 1.1s; }
+#slide-2.active .s2-features.left  .feature:nth-child(2) { animation-delay: 1.25s; }
+#slide-2.active .s2-features.right .feature:nth-child(1) { animation-delay: 1.1s; }
+#slide-2.active .s2-features.right .feature:nth-child(2) { animation-delay: 1.25s; }
+
+/* =========================================================
+   ============= SLIDE 3 — COMPARISON ======================
+========================================================== */
+.s3-header { text-align: center; margin-bottom: 56px; }
+.s3-header .eyebrow {
+  font-family: var(--mono); font-size: 14px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 18px;
+}
+.s3-header h2 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: 68px; letter-spacing: -0.02em;
+}
+.s3-header h2 em { font-style: italic; color: var(--accent); }
+
+.s3-grid {
+  flex: 1;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; position: relative;
+}
+.s3-grid::after {
+  content: ''; position: absolute;
+  left: 50%; top: 0; bottom: 0;
+  width: 1px; background: var(--line);
+}
+.s3-side { padding: 36px 60px; }
+.s3-side.left  { background: rgba(176, 74, 58, 0.04); }
+.s3-side.right { background: rgba(61, 122, 95, 0.04); }
+
+.s3-logos {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 36px; flex-wrap: wrap;
+}
+.s3-logo-chip {
+  width: 50px; height: 50px;
+  border-radius: 12px; background: #fff;
+  border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+  filter: grayscale(0.4) opacity(0.85);
+}
+.s3-logo-chip.gemini     { color: #1a73e8; }
+.s3-logo-chip.chatgpt    { color: #10A37F; }
+.s3-logo-chip.notebooklm { color: #4285F4; }
+.s3-logo-chip.notion     { color: #1a1a1a; }
+.s3-logo-chip.obsidian   { color: #7c3aed; }
+
+.s3-socrates-header {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 36px;
+}
+.s3-socrates-header .mini-logo {
+  width: 50px; height: 50px;
+  border-radius: 12px;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--bg);
+}
+.s3-socrates-header .name {
+  font-family: var(--serif);
+  font-size: 28px; letter-spacing: 0.18em; font-weight: 500;
+}
+
+.s3-points { list-style: none; }
+.s3-points li {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+.s3-points li:last-child { border-bottom: none; }
+.s3-points .ic {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  margin-right: 14px;
+  font-size: 15px; font-weight: 700;
+  vertical-align: -4px;
+}
+.s3-side.left  .ic { background: rgba(176,74,58,0.15);  color: var(--negative); }
+.s3-side.right .ic { background: rgba(61,122,95,0.15);  color: var(--positive); }
+.s3-points .head {
+  font-family: var(--serif);
+  font-size: 22px; font-weight: 500;
+  color: var(--ink); margin-bottom: 6px;
+  display: inline-block;
+}
+.s3-points .desc {
+  font-size: 16px; color: var(--ink-soft);
+  line-height: 1.55; padding-left: 40px;
+}
+.s3-side.left  h3.label-side,
+.s3-side.right h3.label-side {
+  font-family: var(--mono); font-size: 12px;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.s3-side.left  h3.label-side { color: var(--negative); }
+.s3-side.right h3.label-side { color: var(--positive); }
+
+/* =========================================================
+   ============= SLIDE 4 — HOW IT WORKS ====================
+   Larger icons, vertical text development.
+========================================================== */
+.s4-header { text-align: center; margin-bottom: 60px; }
+.s4-header .eyebrow {
+  font-family: var(--mono); font-size: 14px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 18px;
+}
+.s4-header h2 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: 68px; letter-spacing: -0.02em;
+}
+.s4-header h2 em { font-style: italic; color: var(--accent); }
+
+.s4-cols {
+  flex: 1;
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 60px; align-items: start; position: relative;
+}
+.s4-cols::before {
+  content: ''; position: absolute;
+  top: 130px; left: 16%; right: 16%;
+  height: 1px; border-top: 1.5px dashed var(--line);
+  z-index: 0;
+}
+.s4-col {
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  position: relative; z-index: 1;
+}
+.s4-icon-wrap {
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 3px solid var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 38px; position: relative;
+}
+.s4-step-num {
+  position: absolute;
+  top: -10px; right: -10px;
+  width: 48px; height: 48px;
+  border-radius: 50%; background: var(--accent);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 16px; font-weight: 600;
+}
+.s4-col h3 {
+  font-family: var(--serif);
+  font-size: 36px; font-weight: 500;
+  margin-bottom: 18px;
+  letter-spacing: -0.01em;
+}
+.s4-col p {
+  font-size: 17px; line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 380px;
+  margin-bottom: 14px;
+}
+.s4-col p em { color: var(--accent); font-style: italic; }
+.s4-col .tag {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 5px 12px;
+}
+
+/* =========================================================
+   ============= SLIDE 5 — TECHNICAL EVALUATION ============
+   Larger evaluation matrices, no empty space.
+========================================================== */
+.s5-header { text-align: center; margin-bottom: 50px; }
+.s5-header .eyebrow {
+  font-family: var(--mono); font-size: 14px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 18px;
+}
+.s5-header h2 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: 60px; letter-spacing: -0.02em;
+}
+.s5-header h2 em { font-style: italic; color: var(--accent); }
+
+.s5-top {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 80px;
+  margin-bottom: 50px;
+}
+.s5-block { display: flex; flex-direction: column; }
+.s5-block .label {
+  font-family: var(--mono); font-size: 12px;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--ink-mute); margin-bottom: 26px;
+  text-align: center;
+}
+
+/* Larger evaluation matrices, fill the available space */
+.matrix-pair {
+  display: flex; gap: 60px;
+  justify-content: center; align-items: flex-start;
+}
+.matrix {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 14px;
+}
+.matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 70px);
+  grid-template-rows: repeat(5, 70px);
+  gap: 8px;
+  padding: 14px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.04);
+}
+.matrix-cell {
+  background: var(--bg-alt);
+  border-radius: 6px;
+  border: 1px solid var(--line);
+}
+.matrix-cell.fill-1 { background: var(--accent-soft); border-color: var(--accent-soft); }
+.matrix-cell.fill-2 { background: var(--accent);      border-color: var(--accent); }
+.matrix-cell.fill-3 { background: var(--positive); opacity: 0.55; border-color: var(--positive); }
+.matrix-name {
+  font-family: var(--mono); font-size: 13px;
+  color: var(--ink-soft); letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* QAFR Cycle */
+.cycle {
+  position: relative;
+  width: 420px; height: 420px;
+  margin: 0 auto;
+}
+.cycle-node {
+  position: absolute;
+  width: 92px; height: 92px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 3px solid var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif);
+  font-size: 42px; font-weight: 500; color: var(--ink);
+}
+.cycle-node.q { top: 0;          left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; border-color: var(--accent); }
+.cycle-node.a { top: 50%;        right: 0;  transform: translateY(-50%); }
+.cycle-node.f { bottom: 0;       left: 50%; transform: translateX(-50%); }
+.cycle-node.r { top: 50%;        left: 0;   transform: translateY(-50%); }
+.cycle-label {
+  position: absolute;
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.cycle-label.q { top: 96px;     left: 50%; transform: translateX(-50%); }
+.cycle-label.a { top: 50%;      right: 96px; transform: translateY(-50%); }
+.cycle-label.f { bottom: 96px;  left: 50%; transform: translateX(-50%); }
+.cycle-label.r { top: 50%;      left: 96px;  transform: translateY(-50%); }
+.cycle svg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; pointer-events: none;
+}
+
+.s5-bottom {
+  background: var(--bg-alt);
+  border-radius: 16px;
+  padding: 32px 44px; text-align: center;
+}
+.s5-bottom p {
+  font-size: 19px; line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 1300px; margin: 0 auto;
+}
+.s5-bottom strong { color: var(--ink); font-weight: 600; }
+
+/* =========================================================
+   ============= SLIDE 6 — DEMO VIDEO ======================
+========================================================== */
+.s6-header { text-align: center; margin-bottom: 50px; }
+.s6-header .eyebrow {
+  font-family: var(--mono); font-size: 14px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 18px;
+}
+.s6-header h2 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: 68px; letter-spacing: -0.02em;
+}
+.s6-header h2 em { font-style: italic; color: var(--accent); }
+
+.s6-video-wrap {
+  flex: 1; display: flex;
+  align-items: center; justify-content: center;
+}
+.s6-video-frame {
+  width: 100%; max-width: 1500px;
+  aspect-ratio: 16 / 9;
+  background: #0d0d0d;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.18);
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.s6-video-frame video {
+  width: 100%; height: 100%;
+  object-fit: cover; border-radius: 22px;
+}
+.s6-placeholder { text-align: center; color: rgba(255,255,255,0.6); }
+.s6-placeholder .play {
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  border: 2px solid rgba(255,255,255,0.4);
+  margin: 0 auto 24px;
+  display: flex; align-items: center; justify-content: center;
+}
+.s6-placeholder .play::before {
+  content: ''; width: 0; height: 0;
+  border-left: 28px solid rgba(255,255,255,0.85);
+  border-top: 18px solid transparent;
+  border-bottom: 18px solid transparent;
+  margin-left: 8px;
+}
+.s6-placeholder .lbl {
+  font-family: var(--mono); font-size: 13px;
+  letter-spacing: 0.3em; text-transform: uppercase;
+}
+
+/* =========================================================
+   ============= SLIDE 7 — CONCLUSIONS =====================
+========================================================== */
+#slide-7 {
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+}
+.s7-content {
+  max-width: 1300px;
+  display: flex; flex-direction: column; align-items: center;
+}
+.s7-thanks {
+  font-family: var(--serif); font-weight: 300;
+  font-size: 168px; line-height: 1;
+  letter-spacing: -0.04em; margin-bottom: 28px;
+  color: var(--ink);
+}
+.s7-thanks em {
+  font-style: italic; color: var(--accent); font-weight: 400;
+}
+.s7-divider {
+  width: 100px; height: 1px;
+  background: var(--ink); margin: 36px 0 60px;
+}
+.s7-quote {
+  font-family: var(--serif); font-style: italic;
+  font-weight: 300; font-size: 36px;
+  line-height: 1.4; color: var(--ink);
+  max-width: 1100px; position: relative;
+  padding: 0 80px;
+}
+.s7-quote::before, .s7-quote::after {
+  content: '"';
+  font-family: var(--serif);
+  font-size: 100px; position: absolute;
+  color: var(--accent); font-style: normal;
+  line-height: 1;
+}
+.s7-quote::before { left: 0;  top: -30px; }
+.s7-quote::after  { right: 0; bottom: -60px; }
+.s7-attrib {
+  font-family: var(--mono); font-size: 13px;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--ink-mute); margin-top: 50px;
+}
+
+/* =========================================================
+   ENTRY ANIMATIONS
+========================================================== */
+.slide.active .anim-fade-up   { animation: fadeUp 0.8s cubic-bezier(0.2,0.8,0.2,1) both; }
+.slide.active .anim-fade-in   { animation: fadeIn 0.8s ease both; }
+.slide.active .anim-scale-in  { animation: scaleIn 0.7s cubic-bezier(0.2,0.8,0.2,1) both; }
+.slide.active .anim-slide-l   { animation: slideFromLeft 0.8s cubic-bezier(0.2,0.8,0.2,1) both; }
+.slide.active .anim-slide-r   { animation: slideFromRight 0.8s cubic-bezier(0.2,0.8,0.2,1) both; }
+.slide.active .anim-drop      { animation: dropDown 0.9s cubic-bezier(0.2,0.8,0.2,1) both; }
+
+@keyframes fadeUp        { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn        { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleIn       { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
+@keyframes slideFromLeft { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes slideFromRight{ from { opacity: 0; transform: translateX(40px); }  to { opacity: 1; transform: translateX(0); } }
+@keyframes dropDown      { from { opacity: 0; transform: translateY(-80px); } to { opacity: 1; transform: translateY(0); } }
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.25s; }
+.delay-3 { animation-delay: 0.4s; }
+.delay-4 { animation-delay: 0.55s; }
+.delay-5 { animation-delay: 0.7s; }
+</style>
+</head>
+<body>
+
+<!-- =========================================================
+     RE-USABLE SVG: SOCRATES (bearded philosopher silhouette)
+     Used in: brand mark · slide 2 logo · slide 3 mini-logo · slide 4 dialogue icon
+     Modify here to update everywhere.
+========================================================== -->
+<!-- =========================================================
+     RE-USABLE SVG: official SOCRATES logo (from logo_small.svg)
+     Used as the brand mark across slides. Modify here to update everywhere.
+========================================================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="socrates-logo" viewBox="0 0 900 900">
+      <path d="M183.087 692.989C179.075 698.694 175.499 702.906 171.86 705.348C169.955 706.626 167.908 707.509 165.678 707.807C163.434 708.107 161.324 707.772 159.364 707.077C155.724 705.786 152.154 703.047 148.621 700.229C144.873 697.24 140.655 693.711 135.169 689.853C129.676 685.991 124.804 683.127 120.523 680.47C116.448 677.942 112.498 675.37 109.84 672.291C106.851 668.829 105.452 664.698 106.387 659.658C107.227 655.123 109.909 650.152 113.968 644.381L114.143 644.131L114.347 643.906C129.666 626.943 145.246 612.515 159.173 603.687C166.126 599.28 172.94 596.092 179.301 594.823C185.738 593.538 192.068 594.168 197.385 597.907C202.848 601.749 205.515 608.125 206.515 615.009C207.523 621.95 206.961 630.129 205.288 638.715C201.938 655.912 193.922 675.782 183.229 692.775L183.161 692.884L183.087 692.989Z"
+            fill="currentColor" stroke="currentColor" stroke-width="10"/>
+      <path d="M198 599.587C234.591 563.177 236.495 535.844 261.161 495"
+            stroke="currentColor" stroke-width="25" fill="none"/>
+      <path d="M706.073 255.146C720.693 255.015 733.807 255.423 743.875 256.702C748.805 257.329 753.976 258.277 758.528 259.903C760.814 260.719 763.678 261.96 766.459 263.928C768.661 265.485 771.534 268.019 773.689 271.822C778.216 279.012 777.693 286.652 776.597 291.344C775.402 296.456 772.964 301.008 770.727 304.549C766.14 311.809 759.124 319.847 751.104 328.022C734.8 344.638 711.002 365.151 684.032 386.627C670.568 397.348 656.18 408.414 641.351 419.48C652.955 445.18 658.592 468.592 661.722 476.687C680.113 524.255 681.484 544.632 539.266 599.618C390.383 657.182 381.49 625.24 367.967 590.263C362.532 576.207 352.935 556.435 345.407 533.944C317.915 536.682 293.138 538.489 271.249 539.447C242.43 540.707 218.257 540.513 199.307 538.951C181.419 537.478 165.003 534.597 154.229 528.401C147.758 524.678 143.883 518.18 143.318 511.157C142.87 505.575 144.605 501.09 145.637 498.818C147.796 494.06 151.29 489.685 154.228 486.332C160.56 479.105 170.153 470.177 181.331 460.523C203.956 440.981 235.81 416.132 268.549 391.621C301.363 367.054 335.397 342.58 362.542 323.725C376.104 314.304 388.039 306.222 397.289 300.209C401.903 297.21 405.965 294.65 409.288 292.669C412.16 290.957 415.729 288.91 418.791 287.726L419.388 287.5C425.663 285.172 435.371 283.013 446.043 281.002C457.623 278.82 472.045 276.514 488.195 274.219C520.519 269.625 560.328 264.997 599.281 261.45C638.155 257.911 676.605 255.409 706.073 255.146ZM488.904 368.654C486.226 361.925 465.637 363.996 444.543 371.917C423.449 379.839 402.961 393.193 405.639 399.921C408.317 406.649 432.304 402.085 453.398 394.163C474.493 386.242 491.582 375.382 488.904 368.654Z"
+            fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="deck">
+  <div class="stage" id="stage">
+
+  <!-- ============================================
+       SLIDE 1 — THE PROBLEM
+  ============================================= -->
+  <section class="slide active" id="slide-1">
+    <div class="brand-mark">
+      <span class="bm-icon">
+        <svg width="22" height="22" viewBox="0 0 900 900" style="color:var(--accent)"><use href="#socrates-logo"/></svg>
+      </span>
+      SOCRATES
+    </div>
+    <div class="slide-meta"><span class="num">01</span> / 07 &nbsp;·&nbsp; THE PROBLEM</div>
+
+    <div class="s1-grid">
+      <!-- LEFT: text -->
+      <div class="s1-text">
+        <div class="eyebrow anim-fade-up delay-1">An ecosystem of distractions</div>
+        <h1 class="anim-fade-up delay-2">
+          Students don't lack AI tools.<br>
+          They <em>drown</em> in them.
+        </h1>
+        <p class="anim-fade-up delay-3">
+          A new study companion launches every week. Each promises to be <em>the</em> answer.
+        </p>
+        <p class="anim-fade-up delay-4">
+          The result: fragmented workflows, surface-level understanding, and learners who <em>consume</em> AI output instead of <em>producing</em> their own knowledge.
+        </p>
+      </div>
+
+      <!-- RIGHT: confused face with orbit ABOVE the head -->
+      <div class="s1-visual anim-fade-in delay-3">
+        <div class="s1-character">
+          <!-- Orbit ABOVE the head: 5 evenly-spaced AI tool glyphs.
+               Each .orbit-item has a brand class for color; glyph-only, no text labels. -->
+          <div class="orbit-above">
+            <div class="orbit-item gemini">     <span class="logo-glyph">✦</span></div>
+            <div class="orbit-item chatgpt">    <span class="logo-glyph">◉</span></div>
+            <div class="orbit-item notebooklm"> <span class="logo-glyph">◗</span></div>
+            <div class="orbit-item notion">     <span class="logo-glyph">◨</span></div>
+            <div class="orbit-item obsidian">   <span class="logo-glyph">◆</span></div>
+          </div>
+
+          <!-- Exhausted face: X eyes + open mouth -->
+          <div class="face">
+            <div class="eyes">
+              <div class="eye">✕</div>
+              <div class="eye">✕</div>
+            </div>
+            <div class="mouth"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SLIDE 2 — THE SOLUTION
+  ============================================= -->
+  <section class="slide" id="slide-2">
+    <div class="brand-mark">
+      <span class="bm-icon">
+        <svg width="22" height="22" viewBox="0 0 900 900" style="color:var(--accent)"><use href="#socrates-logo"/></svg>
+      </span>
+      SOCRATES
+    </div>
+    <div class="slide-meta"><span class="num">02</span> / 07 &nbsp;·&nbsp; THE SOLUTION</div>
+
+    <!-- Ejected logos (transition from slide 1) — same 5 brand glyphs -->
+    <div class="s2-eject-logo" style="color:#1a73e8">✦</div>
+    <div class="s2-eject-logo" style="color:#10A37F">◉</div>
+    <div class="s2-eject-logo" style="color:#4285F4">◗</div>
+    <div class="s2-eject-logo" style="color:#1a1a1a">◨</div>
+    <div class="s2-eject-logo" style="color:#7c3aed">◆</div>
+
+    <div class="s2-eyebrow">Introducing</div>
+
+    <div class="s2-stage">
+      <!-- LEFT FEATURES -->
+      <div class="s2-features left">
+        <div class="feature">
+          <h3>One Companion</h3>
+          <p>Split-screen interface: your document open, the agent always present. Zero context-switching.</p>
+        </div>
+        <div class="feature">
+          <h3>Active Recall</h3>
+          <p>The agent doesn't answer — it asks. Maieutic questions force you to construct the answer.</p>
+        </div>
+      </div>
+
+      <!-- CENTER: SOCRATES logo (official brand mark) + happy face -->
+      <div class="s2-center">
+        <div class="socrates-logo">
+          <div class="mark">
+            <svg width="100" height="100" viewBox="0 0 900 900" style="color:var(--accent)">
+              <use href="#socrates-logo"/>
+            </svg>
+          </div>
+          <div class="name">SOCRATES</div>
+          <div class="tagline">Learn by being asked</div>
+        </div>
+
+        <div class="face-happy">
+          <div class="eye-h left"></div>
+          <div class="eye-h right"></div>
+          <div class="blush left"></div>
+          <div class="blush right"></div>
+          <div class="smile"></div>
+        </div>
+      </div>
+
+      <!-- RIGHT FEATURES -->
+      <div class="s2-features right">
+        <div class="feature">
+          <h3>Adaptive Scaffolding</h3>
+          <p>A rubric measures the delta between your answer and the optimal one. Hints appear, then fade as you master.</p>
+        </div>
+        <div class="feature">
+          <h3>Feynman Voice Test</h3>
+          <p>Explain a concept aloud. We grade Clarity, Completeness and Correctness — the truest test of mastery.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="s2-footer-tag anim-fade-in" style="animation-delay: 1.6s">
+      The end of passive AI · The return of the question
+    </div>
+  </section>
+
+  <!-- ============================================
+       SLIDE 3 — COMPARISON
+  ============================================= -->
+  <section class="slide" id="slide-3">
+    <div class="brand-mark">
+      <span class="bm-icon">
+        <svg width="22" height="22" viewBox="0 0 900 900" style="color:var(--accent)"><use href="#socrates-logo"/></svg>
+      </span>
+      SOCRATES
+    </div>
+    <div class="slide-meta"><span class="num">03</span> / 07 &nbsp;·&nbsp; COMPARISON</div>
+
+    <div class="s3-header">
+      <div class="eyebrow anim-fade-up delay-1">Why we're different</div>
+      <h2 class="anim-fade-up delay-2">Same surface. <em>Opposite</em> philosophy.</h2>
+    </div>
+
+    <div class="s3-grid">
+      <!-- LEFT: existing AI study tools -->
+      <div class="s3-side left anim-slide-l delay-2">
+        <h3 class="label-side">Existing AI study tools</h3>
+        <div class="s3-logos">
+          <div class="s3-logo-chip gemini">✦</div>
+          <div class="s3-logo-chip chatgpt">◉</div>
+          <div class="s3-logo-chip notebooklm">◗</div>
+          <div class="s3-logo-chip notion">◨</div>
+          <div class="s3-logo-chip obsidian">◆</div>
+        </div>
+        <ul class="s3-points">
+          <li>
+            <span class="head"><span class="ic">✕</span>Answer-first by default</span>
+            <p class="desc">"Explain this" returns a polished summary. The student skips the cognitive work that creates learning.</p>
+          </li>
+          <li>
+            <span class="head"><span class="ic">✕</span>One-size-fits-all</span>
+            <p class="desc">Difficulty doesn't adapt. Same explanation for the master and the beginner.</p>
+          </li>
+          <li>
+            <span class="head"><span class="ic">✕</span>No measurable mastery</span>
+            <p class="desc">Sessions end with a vague feeling of progress. No rubric, no proof.</p>
+          </li>
+          <li>
+            <span class="head"><span class="ic">✕</span>Passive consumption</span>
+            <p class="desc">Read, copy, paste. The student is a customer of AI output, not a producer of knowledge.</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- RIGHT: SOCRATES -->
+      <div class="s3-side right anim-slide-r delay-2">
+        <div class="s3-socrates-header">
+          <div class="mini-logo">
+            <svg width="34" height="34" viewBox="0 0 900 900" style="color:var(--bg)">
+              <use href="#socrates-logo"/>
+            </svg>
+          </div>
+          <div class="name">SOCRATES</div>
+        </div>
+        <h3 class="label-side">Our approach</h3>
+        <ul class="s3-points">
+          <li>
+            <span class="head"><span class="ic">✓</span>Question-first, by design</span>
+            <p class="desc">A guardrail intercepts shortcut prompts and replies with a constructive refusal.</p>
+          </li>
+          <li>
+            <span class="head"><span class="ic">✓</span>Adaptive pacing</span>
+            <p class="desc">Real-time delta scoring drives the difficulty curve. Hints when stuck, acceleration when flying.</p>
+          </li>
+          <li>
+            <span class="head"><span class="ic">✓</span>Rubric-graded mastery</span>
+            <p class="desc">Each session ends with a verifiable map of what you know — and what to revisit.</p>
+          </li>
+          <li>
+            <span class="head"><span class="ic">✓</span>Active production</span>
+            <p class="desc">Mind-maps, voice explanations, Feynman tests. The learner produces; SOCRATES questions.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SLIDE 4 — HOW IT WORKS
+       Larger icons + more vertical text. Center column uses Socrates bust.
+  ============================================= -->
+  <section class="slide" id="slide-4">
+    <div class="brand-mark">
+      <span class="bm-icon">
+        <svg width="22" height="22" viewBox="0 0 900 900" style="color:var(--accent)"><use href="#socrates-logo"/></svg>
+      </span>
+      SOCRATES
+    </div>
+    <div class="slide-meta"><span class="num">04</span> / 07 &nbsp;·&nbsp; HOW IT WORKS</div>
+
+    <div class="s4-header">
+      <div class="eyebrow anim-fade-up delay-1">The method</div>
+      <h2 class="anim-fade-up delay-2">Three agents. <em>One outcome.</em></h2>
+    </div>
+
+    <div class="s4-cols">
+      <!-- COLUMN 1: HOOK -->
+      <div class="s4-col anim-fade-up delay-2">
+        <div class="s4-icon-wrap">
+          <span class="s4-step-num">01</span>
+          <!-- Larger fishhook -->
+          <svg width="130" height="130" viewBox="0 0 80 80" fill="none" stroke="var(--ink)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M40 8 V42 A18 18 0 1 1 22 60" />
+            <line x1="40" y1="6" x2="40" y2="14" stroke-width="5" />
+            <path d="M22 60 L18 56" />
+          </svg>
+        </div>
+        <h3>The Hook</h3>
+        <p>The <em>Curious Agent</em> opens with metaphors, real-world cases and a high-level mind map — never a flat summary.</p>
+        <p>You explore nodes on your own. The boredom barrier breaks before study begins.</p>
+        <span class="tag">Curious Agent</span>
+      </div>
+
+      <!-- COLUMN 2: SOCRATIC DIALOGUE — two figures in conversation -->
+      <div class="s4-col anim-fade-up delay-3">
+        <div class="s4-icon-wrap">
+          <span class="s4-step-num">02</span>
+          <!-- Two facing figures + speech bubbles between them -->
+          <svg width="170" height="170" viewBox="0 0 200 200" fill="none"
+               stroke="var(--ink)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Left person -->
+            <circle cx="40" cy="62" r="18" fill="var(--bg)"/>
+            <path d="M14 130 Q14 92 40 92 Q66 92 66 130" fill="var(--bg)"/>
+            <!-- Right person -->
+            <circle cx="160" cy="62" r="18" fill="var(--bg)"/>
+            <path d="M134 130 Q134 92 160 92 Q186 92 186 130" fill="var(--bg)"/>
+            <!-- Speech bubble from left (question mark) -->
+            <path d="M72 50 Q72 38 84 38 L108 38 Q120 38 120 50 L120 64 Q120 76 108 76 L96 76 L88 84 L88 76 L84 76 Q72 76 72 64 Z"
+                  fill="var(--accent)" stroke="var(--accent)"/>
+            <text x="96" y="64" text-anchor="middle" font-family="Fraunces, Georgia, serif"
+                  font-size="22" font-weight="600" fill="#fff" stroke="none">?</text>
+            <!-- Speech bubble from right (light bulb / insight dot) -->
+            <path d="M128 110 Q128 98 140 98 L156 98 Q168 98 168 110 L168 124 Q168 136 156 136 L150 136 L142 144 L142 136 L140 136 Q128 136 128 124 Z"
+                  fill="var(--bg)"/>
+            <circle cx="148" cy="117" r="3.5" fill="var(--ink)" stroke="none"/>
+          </svg>
+        </div>
+        <h3>The Dialogue</h3>
+        <p>The <em>Socratic Agent</em> rejects passive prompts and drives you toward your cognitive limits.</p>
+        <p>Stuck? Skip a question — the agent learns and recalibrates.</p>
+        <span class="tag">Socratic Agent</span>
+      </div>
+
+      <!-- COLUMN 3: ASSESSMENT -->
+      <div class="s4-col anim-fade-up delay-4">
+        <div class="s4-icon-wrap">
+          <span class="s4-step-num">03</span>
+          <!-- Larger assessment sheet -->
+          <svg width="120" height="150" viewBox="0 0 80 100" fill="none" stroke="var(--ink)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="10" y="6" width="60" height="88" rx="3" fill="#fff"/>
+            <line x1="22" y1="20" x2="58" y2="20" stroke-width="2" opacity="0.3"/>
+            <path d="M20 34 L26 40 L36 28" stroke="var(--positive)" stroke-width="4"/>
+            <line x1="42" y1="36" x2="60" y2="36" stroke-width="2" opacity="0.3"/>
+            <path d="M20 50 L30 60 M30 50 L20 60" stroke="var(--negative)" stroke-width="4"/>
+            <line x1="42" y1="55" x2="60" y2="55" stroke-width="2" opacity="0.3"/>
+            <path d="M20 73 L26 79 L36 67" stroke="var(--positive)" stroke-width="4"/>
+            <line x1="42" y1="74" x2="60" y2="74" stroke-width="2" opacity="0.3"/>
+          </svg>
+        </div>
+        <h3>The Verdict</h3>
+        <p>The <em>Feynman Agent</em> asks you to explain a concept aloud, then grades Clarity, Completeness, Correctness.</p>
+        <p>The output: a transparent map of your real mastery — and the next step.</p>
+        <span class="tag">Feynman Agent</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SLIDE 5 — TECHNICAL EVALUATION
+       Larger evaluation matrices, balanced layout.
+  ============================================= -->
+  <section class="slide" id="slide-5">
+    <div class="brand-mark">
+      <span class="bm-icon">
+        <svg width="22" height="22" viewBox="0 0 900 900" style="color:var(--accent)"><use href="#socrates-logo"/></svg>
+      </span>
+      SOCRATES
+    </div>
+    <div class="slide-meta"><span class="num">05</span> / 07 &nbsp;·&nbsp; TECHNICAL EVALUATION</div>
+
+    <div class="s5-header">
+      <div class="eyebrow anim-fade-up delay-1">Under the hood</div>
+      <h2 class="anim-fade-up delay-2">Measured, not <em>assumed</em>.</h2>
+    </div>
+
+    <div class="s5-top">
+      <!-- LEFT: Evaluation matrices (now larger) -->
+      <div class="s5-block anim-slide-l delay-2">
+        <div class="label">Scoring Rubrics · Delta Measurement</div>
+        <div class="matrix-pair">
+          <div class="matrix">
+            <div class="matrix-grid">
+              <div class="matrix-cell fill-2"></div><div class="matrix-cell fill-1"></div>
+              <div class="matrix-cell fill-3"></div><div class="matrix-cell"></div>
+              <div class="matrix-cell"></div>       <div class="matrix-cell fill-2"></div>
+              <div class="matrix-cell fill-1"></div><div class="matrix-cell fill-3"></div>
+              <div class="matrix-cell fill-2"></div><div class="matrix-cell"></div>
+            </div>
+            <div class="matrix-name">Rubric · Reference</div>
+          </div>
+          <div class="matrix">
+            <div class="matrix-grid">
+              <div class="matrix-cell"></div>       <div class="matrix-cell fill-3"></div>
+              <div class="matrix-cell fill-2"></div><div class="matrix-cell fill-1"></div>
+              <div class="matrix-cell fill-3"></div><div class="matrix-cell"></div>
+              <div class="matrix-cell"></div>       <div class="matrix-cell fill-2"></div>
+              <div class="matrix-cell fill-1"></div><div class="matrix-cell fill-3"></div>
+            </div>
+            <div class="matrix-name">Rubric · Learner</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: QAFR cycle -->
+      <div class="s5-block anim-slide-r delay-2">
+        <div class="label">The Reasoning Loop</div>
+        <div class="cycle">
+          <svg viewBox="0 0 420 420">
+            <defs>
+              <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+                <polygon points="0 0, 7 3, 0 6" fill="var(--ink)" />
+              </marker>
+              <marker id="arrowhead-accent" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+                <polygon points="0 0, 7 3, 0 6" fill="var(--accent)" />
+              </marker>
+            </defs>
+            <!-- Q -> A -->
+            <path d="M 290 60 A 150 150 0 0 1 360 130" stroke="var(--ink)" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+            <!-- A -> F -->
+            <path d="M 360 290 A 150 150 0 0 1 290 360" stroke="var(--ink)" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+            <!-- F -> R -->
+            <path d="M 130 360 A 150 150 0 0 1 60 290" stroke="var(--ink)" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+            <!-- R -> Q (accent) -->
+            <path d="M 60 130 A 150 150 0 0 1 130 60" stroke="var(--accent)" stroke-width="2.5" fill="none" marker-end="url(#arrowhead-accent)"/>
+          </svg>
+          <div class="cycle-node q">Q</div>
+          <div class="cycle-node a">A</div>
+          <div class="cycle-node f">F</div>
+          <div class="cycle-node r">R</div>
+          <div class="cycle-label q">Question</div>
+          <div class="cycle-label a">Answer</div>
+          <div class="cycle-label f">Feedback</div>
+          <div class="cycle-label r">Refine</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="s5-bottom anim-fade-up delay-3">
+      <p>
+        SOCRATES is benchmarked along two axes: <strong>pedagogical quality</strong> (rubric-graded relevance and Socratic adherence) and <strong>learner outcome</strong> (post-session recall, transfer, Feynman scores). Every interaction is a closed <strong>Q → A → F → R</strong> loop: question posed, answer given, feedback computed from the delta, next question refined. Pacing reacts in real time to evasiveness, skips and audio-hesitancy markers.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SLIDE 6 — DEMO VIDEO
+  ============================================= -->
+  <section class="slide" id="slide-6">
+    <div class="brand-mark">
+      <span class="bm-icon">
+        <svg width="22" height="22" viewBox="0 0 900 900" style="color:var(--accent)"><use href="#socrates-logo"/></svg>
+      </span>
+      SOCRATES
+    </div>
+    <div class="slide-meta"><span class="num">06</span> / 07 &nbsp;·&nbsp; DEMO</div>
+
+    <div class="s6-header">
+      <div class="eyebrow anim-fade-up delay-1">See it in action</div>
+      <h2 class="anim-fade-up delay-2">A <em>20-second</em> walkthrough.</h2>
+    </div>
+
+    <div class="s6-video-wrap anim-scale-in delay-3">
+      <div class="s6-video-frame">
+        <!-- ============================================
+             DEMO VIDEO
+             To swap the demo: replace assets/short-demo.mp4
+             or change the src attribute below.
+        ============================================= -->
+        <video src="short-demo.mp4" controls preload="metadata" playsinline></video>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SLIDE 7 — CONCLUSIONS
+  ============================================= -->
+  <section class="slide" id="slide-7">
+    <div class="brand-mark">
+      <span class="bm-icon">
+        <svg width="22" height="22" viewBox="0 0 900 900" style="color:var(--accent)"><use href="#socrates-logo"/></svg>
+      </span>
+      SOCRATES
+    </div>
+    <div class="slide-meta"><span class="num">07</span> / 07 &nbsp;·&nbsp; THANK YOU</div>
+
+    <div class="s7-content">
+      <h1 class="s7-thanks anim-fade-up delay-1">Thank <em>you</em>.</h1>
+      <div class="s7-divider anim-fade-in delay-2"></div>
+      <blockquote class="s7-quote anim-fade-up delay-3">
+        Learning is more effective when it is an active rather than a passive process.
+      </blockquote>
+      <div class="s7-attrib anim-fade-up delay-4">— Kurt Lewin</div>
+    </div>
+  </section>
+
+  </div><!-- /.stage -->
+</div><!-- /.deck -->
+
+<div class="progress" id="progress"></div>
+<div class="nav-hint">
+  <kbd>←</kbd> <kbd>→</kbd> &nbsp;navigate &nbsp;·&nbsp; <kbd>F</kbd> &nbsp;fullscreen
+</div>
+
+<script>
+/* DECK ENGINE: scales 1920x1080 stage to fit window, arrow nav, F=fullscreen */
+(function () {
+  const slides = document.querySelectorAll('.slide');
+  const progress = document.getElementById('progress');
+  const stage = document.getElementById('stage');
+  let idx = 0;
+
+  function show(n) {
+    n = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, i) => s.classList.toggle('active', i === n));
+    idx = n;
+    progress.style.width = ((n + 1) / slides.length * 100) + '%';
+  }
+  function fitStage() {
+    const W = window.innerWidth, H = window.innerHeight;
+    const baseW = 1920, baseH = 1080;
+    const scale = Math.min(W / baseW, H / baseH);
+    stage.style.transform = `scale(${scale})`;
+  }
+  window.addEventListener('resize', fitStage);
+  fitStage();
+
+  document.addEventListener('keydown', (e) => {
+    if (['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)) { e.preventDefault(); show(idx + 1); }
+    else if (['ArrowLeft','ArrowUp','PageUp'].includes(e.key))     { e.preventDefault(); show(idx - 1); }
+    else if (e.key === 'Home') show(0);
+    else if (e.key === 'End')  show(slides.length - 1);
+    else if (e.key === 'f' || e.key === 'F') {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+    else if (/^[1-9]$/.test(e.key)) show(parseInt(e.key, 10) - 1);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('a, button, video, input, .nav-hint')) return;
+    const x = e.clientX / window.innerWidth;
+    if (x > 0.5) show(idx + 1); else show(idx - 1);
+  });
+
+  show(0);
+})();
+</script>
+
+</body>
+</html>

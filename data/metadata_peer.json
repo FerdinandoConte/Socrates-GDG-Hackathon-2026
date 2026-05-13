@@ -1,0 +1,190 @@
+{
+  "backupVersion": 1,
+  "appVersion": "2.0.17",
+  "timestamp": 1778400000000,
+  "account": { "email": "peer@example.com", "plan": "free" },
+  "books": [
+    {
+      "title": "Structuring Agents, Skills, and MCPs: What We Can Learn from Anthropic's Projects",
+      "path": "Structuring Agents Skills and MCPs.pdf",
+      "pages": 12,
+      "type": "Book",
+      "fileType": "application/pdf",
+      "headings": [
+        { "enumeration": 0, "hasChildren": false, "indentLevel": 0, "offset": 174, "pageNumber": 1, "title": "Introduction", "type": "headings", "parentID": "peer-book-001", "id": "ph-01", "createdAt": 1778400000000, "updatedAt": 1778400000000 },
+        { "enumeration": 0, "hasChildren": false, "indentLevel": 0, "offset": 200, "pageNumber": 1, "title": "The three Layers", "type": "headings", "parentID": "peer-book-001", "id": "ph-02", "createdAt": 1778400000000, "updatedAt": 1778400000000 },
+        { "enumeration": 0, "hasChildren": false, "indentLevel": 0, "offset": 300, "pageNumber": 2, "title": "Skill design: Author Once, Syndicate Everywhere", "type": "headings", "parentID": "peer-book-001", "id": "ph-03", "createdAt": 1778400000000, "updatedAt": 1778400000000 },
+        { "enumeration": 0, "hasChildren": false, "indentLevel": 1, "offset": 350, "pageNumber": 3, "title": "Skills are passive, not agentic", "type": "headings", "parentID": "peer-book-001", "id": "ph-04", "createdAt": 1778400000000, "updatedAt": 1778400000000 },
+        { "enumeration": 0, "hasChildren": false, "indentLevel": 1, "offset": 400, "pageNumber": 3, "title": "Slash commands as skill entry points", "type": "headings", "parentID": "peer-book-001", "id": "ph-05", "createdAt": 1778400000000, "updatedAt": 1778400000000 },
+        { "enumeration": 0, "hasChildren": false, "indentLevel": 0, "offset": 450, "pageNumber": 3, "title": "Agent Design: Identity, Workflow, Guardrails", "type": "headings", "parentID": "peer-book-001", "id": "ph-06", "createdAt": 1778400000000, "updatedAt": 1778400000000 },
+        { "enumeration": 0, "hasChildren": false, "indentLevel": 1, "offset": 500, "pageNumber": 3, "title": "The agent prompt template", "type": "headings", "parentID": "peer-book-001", "id": "ph-07", "createdAt": 1778400000000, "updatedAt": 1778400000000 },
+        { "enumeration": 0, "hasChildren": false, "indentLevel": 1, "offset": 550, "pageNumber": 4, "title": "Explicit deliverables over vague mandates", "type": "headings", "parentID": "peer-book-001", "id": "ph-08", "createdAt": 1778400000000, "updatedAt": 1778400000000 },
+        { "enumeration": 0, "hasChildren": false, "indentLevel": 1, "offset": 600, "pageNumber": 4, "title": "Workflow as skill composition", "type": "headings", "parentID": "peer-book-001", "id": "ph-09", "createdAt": 1778400000000, "updatedAt": 1778400000000 },
+        { "enumeration": 0, "hasChildren": false, "indentLevel": 1, "offset": 650, "pageNumber": 5, "title": "Guardrails: what the agent must never do", "type": "headings", "parentID": "peer-book-001", "id": "ph-10", "createdAt": 1778400000000, "updatedAt": 1778400000000 },
+        { "enumeration": 0, "hasChildren": false, "indentLevel": 0, "offset": 700, "pageNumber": 6, "title": "Security Through Tiered Isolation", "type": "headings", "parentID": "peer-book-001", "id": "ph-11", "createdAt": 1778400000000, "updatedAt": 1778400000000 },
+        { "enumeration": 0, "hasChildren": false, "indentLevel": 0, "offset": 900, "pageNumber": 8, "title": "MCP Connectors: Centralized Data Access", "type": "headings", "parentID": "peer-book-001", "id": "ph-12", "createdAt": 1778400000000, "updatedAt": 1778400000000 },
+        { "enumeration": 0, "hasChildren": false, "indentLevel": 0, "offset": 950, "pageNumber": 9, "title": "Composition Patterns", "type": "headings", "parentID": "peer-book-001", "id": "ph-13", "createdAt": 1778400000000, "updatedAt": 1778400000000 },
+        { "enumeration": 0, "hasChildren": false, "indentLevel": 0, "offset": 1000, "pageNumber": 10, "title": "Summary of Principles", "type": "headings", "parentID": "peer-book-001", "id": "ph-14", "createdAt": 1778400000000, "updatedAt": 1778400000000 },
+        { "enumeration": 0, "hasChildren": false, "indentLevel": 1, "offset": 750, "pageNumber": 6, "title": "The untrusted-content problem", "type": "headings", "parentID": "peer-book-001", "id": "ph-15", "createdAt": 1778400000000, "updatedAt": 1778400000000 },
+        { "enumeration": 0, "hasChildren": false, "indentLevel": 1, "offset": 780, "pageNumber": 6, "title": "Subagent tiers", "type": "headings", "parentID": "peer-book-001", "id": "ph-16", "createdAt": 1778400000000, "updatedAt": 1778400000000 },
+        { "enumeration": 0, "hasChildren": false, "indentLevel": 1, "offset": 820, "pageNumber": 7, "title": "Deny-by-default tooling", "type": "headings", "parentID": "peer-book-001", "id": "ph-17", "createdAt": 1778400000000, "updatedAt": 1778400000000 },
+        { "enumeration": 0, "hasChildren": false, "indentLevel": 1, "offset": 860, "pageNumber": 8, "title": "One source, many consumers", "type": "headings", "parentID": "peer-book-001", "id": "ph-18", "createdAt": 1778400000000, "updatedAt": 1778400000000 },
+        { "enumeration": 0, "hasChildren": false, "indentLevel": 1, "offset": 880, "pageNumber": 8, "title": "Connector access as a security boundary", "type": "headings", "parentID": "peer-book-001", "id": "ph-19", "createdAt": 1778400000000, "updatedAt": 1778400000000 },
+        { "enumeration": 0, "hasChildren": false, "indentLevel": 1, "offset": 910, "pageNumber": 9, "title": "Agent-to-agent handoffs", "type": "headings", "parentID": "peer-book-001", "id": "ph-20", "createdAt": 1778400000000, "updatedAt": 1778400000000 },
+        { "enumeration": 0, "hasChildren": false, "indentLevel": 1, "offset": 930, "pageNumber": 9, "title": "Dual deployment from one source", "type": "headings", "parentID": "peer-book-001", "id": "ph-21", "createdAt": 1778400000000, "updatedAt": 1778400000000 }
+      ],
+      "keywords": [
+        { "pageNo": 6, "text": "tiered isolation", "type": "keywords", "parentID": "peer-book-001", "id": "pkw-01", "createdAt": 1778401200000, "updatedAt": 1778401200000 },
+        { "pageNo": 6, "text": "Reader tier", "type": "keywords", "parentID": "peer-book-001", "id": "pkw-02", "createdAt": 1778401260000, "updatedAt": 1778401260000 },
+        { "pageNo": 6, "text": "Orchestrator tier", "type": "keywords", "parentID": "peer-book-001", "id": "pkw-03", "createdAt": 1778401320000, "updatedAt": 1778401320000 },
+        { "pageNo": 6, "text": "trust boundary", "type": "keywords", "parentID": "peer-book-001", "id": "pkw-04", "createdAt": 1778401380000, "updatedAt": 1778401380000 },
+        { "pageNo": 6, "text": "untrusted content", "type": "keywords", "parentID": "peer-book-001", "id": "pkw-05", "createdAt": 1778401440000, "updatedAt": 1778401440000 },
+        { "pageNo": 6, "text": "subagent tiers", "type": "keywords", "parentID": "peer-book-001", "id": "pkw-06", "createdAt": 1778401500000, "updatedAt": 1778401500000 },
+        { "pageNo": 6, "text": "privilege separation", "type": "keywords", "parentID": "peer-book-001", "id": "pkw-07", "createdAt": 1778401560000, "updatedAt": 1778401560000 },
+        { "pageNo": 7, "text": "deny-by-default", "type": "keywords", "parentID": "peer-book-001", "id": "pkw-08", "createdAt": 1778401620000, "updatedAt": 1778401620000 },
+        { "pageNo": 7, "text": "tooling restrictions", "type": "keywords", "parentID": "peer-book-001", "id": "pkw-09", "createdAt": 1778401680000, "updatedAt": 1778401680000 },
+        { "pageNo": 7, "text": "prompt injection defense", "type": "keywords", "parentID": "peer-book-001", "id": "pkw-10", "createdAt": 1778401740000, "updatedAt": 1778401740000 },
+        { "pageNo": 7, "text": "MCP access tiers", "type": "keywords", "parentID": "peer-book-001", "id": "pkw-11", "createdAt": 1778401800000, "updatedAt": 1778401800000 },
+        { "pageNo": 7, "text": "write access boundary", "type": "keywords", "parentID": "peer-book-001", "id": "pkw-12", "createdAt": 1778401860000, "updatedAt": 1778401860000 },
+        { "pageNo": 8, "text": "MCP connectors", "type": "keywords", "parentID": "peer-book-001", "id": "pkw-13", "createdAt": 1778401920000, "updatedAt": 1778401920000 },
+        { "pageNo": 8, "text": "canonical data source", "type": "keywords", "parentID": "peer-book-001", "id": "pkw-14", "createdAt": 1778401980000, "updatedAt": 1778401980000 },
+        { "pageNo": 8, "text": "connector access control", "type": "keywords", "parentID": "peer-book-001", "id": "pkw-15", "createdAt": 1778402040000, "updatedAt": 1778402040000 },
+        { "pageNo": 1, "text": "three-layer architecture", "type": "keywords", "parentID": "peer-book-001", "id": "pkw-16", "createdAt": 1778400600000, "updatedAt": 1778400600000 },
+        { "pageNo": 1, "text": "Skills", "type": "keywords", "parentID": "peer-book-001", "id": "pkw-17", "createdAt": 1778400660000, "updatedAt": 1778400660000 },
+        { "pageNo": 1, "text": "Agents", "type": "keywords", "parentID": "peer-book-001", "id": "pkw-18", "createdAt": 1778400720000, "updatedAt": 1778400720000 },
+        { "pageNo": 2, "text": "canonical location", "type": "keywords", "parentID": "peer-book-001", "id": "pkw-19", "createdAt": 1778400780000, "updatedAt": 1778400780000 },
+        { "pageNo": 3, "text": "passive skills", "type": "keywords", "parentID": "peer-book-001", "id": "pkw-20", "createdAt": 1778400840000, "updatedAt": 1778400840000 }
+      ],
+      "notes": [
+        {
+          "text": "The three tiers (Reader, Orchestrator, Executor) each operate with different trust levels and tool access. The key insight: a tier that cannot reach external systems cannot exfiltrate data, even if compromised.",
+          "pageNo": 6,
+          "type": "notes",
+          "parentID": "peer-book-001",
+          "id": "pn-01",
+          "createdAt": 1778401500000,
+          "updatedAt": 1778401500000
+        },
+        {
+          "text": "Deny-by-default means every tool call must be explicitly whitelisted. This flips the traditional approach: instead of blocking known bad actions, you only allow known good ones.",
+          "pageNo": 7,
+          "type": "notes",
+          "parentID": "peer-book-001",
+          "id": "pn-02",
+          "createdAt": 1778401900000,
+          "updatedAt": 1778401900000
+        },
+        {
+          "text": "MCP connectors as the data layer — one connector, many agents. The access boundary IS the security boundary.",
+          "pageNo": 8,
+          "type": "notes",
+          "parentID": "peer-book-001",
+          "id": "pn-03",
+          "createdAt": 1778402100000,
+          "updatedAt": 1778402100000
+        }
+      ],
+      "chats": [
+        {
+          "title": "Tiered isolation deep dive",
+          "messages": [
+            { "id": "pm-01", "role": "user", "content": "Explain in detail how the Reader tier is isolated from external systems" },
+            { "id": "pm-02", "role": "assistant", "content": "The Reader tier operates in a sandboxed environment with no outbound network access..." }
+          ],
+          "type": "chats",
+          "parentID": "peer-book-001",
+          "id": "pc-01",
+          "createdAt": 1778401700000,
+          "updatedAt": 1778401700000
+        }
+      ],
+      "questions": [
+        {
+          "id": "pq-01",
+          "parentID": "peer-book-001",
+          "type": "questions",
+          "text": "What is the purpose of tiered isolation in agent design?",
+          "answer": "To separate agents by trust level so that a compromised tier cannot access systems beyond its privilege boundary.",
+          "pageNo": 6,
+          "Card": { "due": "2026-05-20T10:00:00.000Z", "stability": 12.0, "difficulty": 3.5, "elapsed_days": 0, "scheduled_days": 12, "reps": 6, "lapses": 0, "state": 2, "last_review": "2026-05-08T10:00:00.000Z" },
+          "results": [
+            { "time": 1778232000000, "rating": 3 },
+            { "time": 1778318400000, "rating": 4 },
+            { "time": 1778404800000, "rating": 4 },
+            { "time": 1778491200000, "rating": 4 },
+            { "time": 1778577600000, "rating": 5 },
+            { "time": 1778664000000, "rating": 5 }
+          ],
+          "createdAt": 1778232000000,
+          "updatedAt": 1778664000000
+        },
+        {
+          "id": "pq-02",
+          "parentID": "peer-book-001",
+          "type": "questions",
+          "text": "Which tier in the architecture is allowed MCP write access and why?",
+          "answer": "Only the Orchestrator tier has MCP write access because it operates with verified identity and is never exposed to untrusted content.",
+          "pageNo": 7,
+          "Card": { "due": "2026-05-18T10:00:00.000Z", "stability": 10.5, "difficulty": 3.8, "elapsed_days": 0, "scheduled_days": 10, "reps": 5, "lapses": 0, "state": 2, "last_review": "2026-05-08T10:00:00.000Z" },
+          "results": [
+            { "time": 1778232600000, "rating": 2 },
+            { "time": 1778319000000, "rating": 3 },
+            { "time": 1778405400000, "rating": 4 },
+            { "time": 1778491800000, "rating": 4 },
+            { "time": 1778664600000, "rating": 5 }
+          ],
+          "createdAt": 1778232600000,
+          "updatedAt": 1778664600000
+        },
+        {
+          "id": "pq-03",
+          "parentID": "peer-book-001",
+          "type": "questions",
+          "text": "What does deny-by-default tooling mean in practice?",
+          "answer": "Every tool call is blocked unless explicitly whitelisted. No tool is available by default — agents must earn access.",
+          "pageNo": 7,
+          "Card": { "due": "2026-05-19T10:00:00.000Z", "stability": 11.0, "difficulty": 3.6, "elapsed_days": 0, "scheduled_days": 11, "reps": 6, "lapses": 0, "state": 2, "last_review": "2026-05-08T10:00:00.000Z" },
+          "results": [
+            { "time": 1778233200000, "rating": 3 },
+            { "time": 1778319600000, "rating": 4 },
+            { "time": 1778406000000, "rating": 4 },
+            { "time": 1778492400000, "rating": 4 },
+            { "time": 1778578800000, "rating": 5 },
+            { "time": 1778665200000, "rating": 5 }
+          ],
+          "createdAt": 1778233200000,
+          "updatedAt": 1778665200000
+        },
+        {
+          "id": "pq-04",
+          "parentID": "peer-book-001",
+          "type": "questions",
+          "text": "Why is the Reader MCP denied write access?",
+          "answer": "Because the Reader processes untrusted external content (PDFs, web pages). Giving it write access would allow prompt-injected instructions to modify data.",
+          "pageNo": 6,
+          "Card": { "due": "2026-05-21T10:00:00.000Z", "stability": 13.0, "difficulty": 3.2, "elapsed_days": 0, "scheduled_days": 13, "reps": 6, "lapses": 0, "state": 2, "last_review": "2026-05-08T10:00:00.000Z" },
+          "results": [
+            { "time": 1778233800000, "rating": 3 },
+            { "time": 1778320200000, "rating": 4 },
+            { "time": 1778406600000, "rating": 5 },
+            { "time": 1778493000000, "rating": 5 },
+            { "time": 1778579400000, "rating": 5 },
+            { "time": 1778665800000, "rating": 5 }
+          ],
+          "createdAt": 1778233800000,
+          "updatedAt": 1778665800000
+        }
+      ],
+      "readingSessions": [
+        { "pageNo": 1, "startTime": 1778400000000, "endTime": 1778400900000, "durationSeconds": 900, "id": "prs-01", "type": "readingSessions", "parentID": "peer-book-001" },
+        { "pageNo": 6, "startTime": 1778401200000, "endTime": 1778402100000, "durationSeconds": 900, "id": "prs-02", "type": "readingSessions", "parentID": "peer-book-001" },
+        { "pageNo": 7, "startTime": 1778401680000, "endTime": 1778401920000, "durationSeconds": 240, "id": "prs-03", "type": "readingSessions", "parentID": "peer-book-001" },
+        { "pageNo": 8, "startTime": 1778401920000, "endTime": 1778402400000, "durationSeconds": 480, "id": "prs-04", "type": "readingSessions", "parentID": "peer-book-001" }
+      ],
+      "id": "peer-book-001",
+      "parentID": "peer-account-001",
+      "createdAt": 1778400000000,
+      "updatedAt": 1778402400000
+    }
+  ]
+}
