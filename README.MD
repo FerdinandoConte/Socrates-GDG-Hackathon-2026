@@ -127,7 +127,7 @@ Developed by:
 *   **Ferdinando Conte**
 *   **Alessandro Procoli**
 *   **Nicolas Oberi**
-*   **Matteo Trossi**
+*   **Matteo Trossi** - [GitHub](https://github.com/DeveloperMatt02) · [LinkedIn](https://linkedin.com/in/matteotrossi)
 
 ## 📄 License
 
